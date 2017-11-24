@@ -39,6 +39,8 @@ void Item::print(){
 	}
 }
 
+
+
 void Item::item_add_conection(float weight,Item & target){
 
 	weights.push_back(weight);

@@ -6,7 +6,7 @@
 #
 
 # define the executable file 
-MAIN = secratary
+MAIN = secretary
 
 # define the C source files
 SRCS = item.cpp organizer.cpp main.cpp

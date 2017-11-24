@@ -34,6 +34,7 @@ class Organizer
 	public:
 		Organizer();
 		void make_ready();
+		void print_actuall(Item & item,ItemTyp itemTyp);
 
 		std::vector<Item> items;
 

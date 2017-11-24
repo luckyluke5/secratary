@@ -39,6 +39,26 @@ int main(int argc, char **argv)
 
 	o.make_ready();
 
+//	o.items[0].print();
+
+	o.items[0].print();
+	o.items[1].print();
+	o.print_actuall(o.items[0],question);
+	std::cout<<"item 1"<<std::endl;
+	o.print_actuall(o.items[1],question);
+	std::cout<<"item 2"<<std::endl;
+	o.print_actuall(o.items[2],question);
+	std::cout<<"item 3"<<std::endl;
+	o.print_actuall(o.items[3],question);
+	std::cout<<"item 4"<<std::endl;
+	o.print_actuall(o.items[4],question);
+	std::cout<<"item 5"<<std::endl;
+	o.print_actuall(o.items[5],question);
+	std::cout<<"item 6"<<std::endl;
+	o.print_actuall(o.items[6],question);
+	std::cout<<"item 7"<<std::endl;
+	o.print_actuall(o.items[7],question);
+
 	o.print();
 	
 	return 0;
