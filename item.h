@@ -29,7 +29,7 @@
 #include <iostream>
 #include <vector>
 
-enum ItemTyp{question, action, nothing};
+enum ItemTyp{nothing, question,place,person, action };
 
 class Item
 {
