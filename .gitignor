@@ -1,0 +1,9 @@
+/*.exe
+*.d
+*.o
+blatt1
+*.csv
+*.statistics
+*.parameter
+*.particles
+*.xyz
