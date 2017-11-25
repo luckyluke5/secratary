@@ -91,9 +91,13 @@ std::vector<size_t>  Organizer::print_actuall(std::vector<size_t> visitedElement
 	topFiveI.pop_back();
 
 //	std::cout<<"test"<<topFiveF.size()<<std::endl;
+	std::cout<<"0: ??????"<<std::endl;
+	
 	for(size_t i=0;i<topFiveF.size();i++ ){
 		std::cout<<i+1<<": "<<items[topFiveI[i]].text<<" \t\t\t(W:"<<topFiveF[i]<<")"<<std::endl;
 	}
+
+	
 
 	return topFiveI;
 
@@ -114,38 +118,90 @@ void Organizer::printname(size_t item){
 
 
 
-void Organizer::update_weights(size_t from_id,size_t to_id){
+void Organizer::update_weights(std::vector<size_t> from_ids,size_t to_id){
 
 //	print();
-	float sumweightsbefore=0;
-	for (size_t i=0; i<items[from_id].weights.size();i++){
-		sumweightsbefore+=items[from_id].weights[i];	
+	for (auto from_id: from_ids){  
+		/*float sumweightsbefore=0;
+		print(from_id);
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			sumweightsbefore+=items[from_id].weights[i];	
+	
+		}
+		float differenc=0;
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			if (items[from_id].targets[i]!=to_id){
+				differenc+=items[from_id].weights[i]*0.1;
+				items[from_id].weights[i]-=items[from_id].weights[i]*0.1;
+			}
+		
+		}
+		if (differenc==0) differenc=1;
+		bool exsisting=false;
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			if (items[from_id].targets[i]==to_id){
+				items[from_id].weights[i]+=differenc;
+				exsisting=true;
+			}	
 
-	}
-	float differenc=0;
-	for (size_t i=0; i<items[from_id].weights.size();i++){
-		if (items[from_id].targets[i]!=to_id){
-			differenc+=items[from_id].weights[i]*0.1;
-			items[from_id].weights[i]-=items[from_id].weights[i]*0.1;
+		}
+		if (exsisting==false){
+			for (auto it : items[from_id].weights) it-=it*(2.0/(items[from_id].targets.size()+1.0));
+			items[from_id].item_add_conection(2.0/(items[from_id].targets.size()+1.0),to_id);
+		}
+		float sumweightsafter=0;
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			sumweightsafter+=items[from_id].weights[i];	
+
+		}*/
+
+		//neuer versuch
+
+		float sumweightsbefore=0;
+		print(from_id);
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			sumweightsbefore+=items[from_id].weights[i];	
+	
 		}
 
+
+		size_t connection_id;
+		bool exsisting=false;
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			if (items[from_id].targets[i]==to_id){
+				exsisting=true;
+				connection_id=i;
+				break;
+			}	
+
+		}
+		if (exsisting==false){
+			//std::cout<<"hinzufügen von verbindungen"<<to_id<<"its"<<items[to_id].text<<std::endl;
+			for (auto & it : items[from_id].weights) it-=it*(2.0/(items[from_id].targets.size()+2.0));
+			items[from_id].item_add_conection(2.0/(items[from_id].targets.size()+2.0),to_id);
+		}else{
+			double differenc=0;
+			for (auto & it:items[from_id].weights){
+				//std::cout<<"test"<<differenc<<"its"<<it<<std::endl;
+				it-=it*0.10000000;
+				differenc+=it*0.10000000;
+			}
+			items[from_id].weights[connection_id]+=differenc;
+	
+
+		}
+		
+		float sumweightsafter=0;
+		for (size_t i=0; i<items[from_id].weights.size();i++){
+			sumweightsafter+=items[from_id].weights[i];	
+
+		}
+	
+		print(from_id);
+
+		std::cout<<items[from_id].text<<", WeightsSumBefore: "<<sumweightsbefore<<" WeightsSumAfter: "<<sumweightsafter<<std::endl;
+	//	print();
 	}
-	if (differenc==0) differenc=1;
-	for (size_t i=0; i<items[from_id].weights.size();i++){
-		if (items[from_id].targets[i]==to_id){
-			items[from_id].weights[i]+=differenc;
-		}	
-
-	}
-	float sumweightsafter=0;
-	for (size_t i=0; i<items[from_id].weights.size();i++){
-		sumweightsafter+=items[from_id].weights[i];	
-
-	}
-
-	std::cout<<items[from_id].text<<", WeightsSumBefore: "<<sumweightsbefore<<" WeightsSumAfter: "<<sumweightsafter<<std::endl;
-//	print();
-
 }
 
 

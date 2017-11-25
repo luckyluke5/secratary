@@ -48,6 +48,7 @@ int main(int argc, char **argv)
 		
 		visitedElements.push_back(actuallElement);
 		std::vector<size_t> output=o.print_actuall(visitedElements,o.items[actuallElement].answerTyp);
+		//std::cout<<"tippen sie eine zahl grosser null ein oder 0 für eine eigene antwort"<<std::endl;
 
 		//o.print(actuallElement);
 		
@@ -64,15 +65,17 @@ int main(int argc, char **argv)
 			std::cout<<name<<std::endl;
 			//o.print(actuallElement);
 			
-			o.items.push_back(Item(o.items[actuallElement].answerTyp,question,std::string(name),o.items.size()-1));
+			o.items.push_back(Item(o.items[actuallElement].answerTyp,question,name,o.items.size()));
+
+			//o.print(o.items.size()-1);
 
 			//o.print(actuallElement);
 			
-			o.items[actuallElement].item_add_conection(0,o.items.size()-1);
+			//o.items[actuallElement].item_add_conection(0,o.items.size()-1);
 
 			//o.print(actuallElement);
 
-			o.update_weights(actuallElement,o.items.size()-1); //keine adresse
+			o.update_weights(visitedElements,o.items.size()-1); //keine adresse
 			//std::cout << "vor print actuall"<<std::endl;
 
 			//o.print(actuallElement);
@@ -85,19 +88,33 @@ int main(int argc, char **argv)
 
 			//o.print_actuall(*output[i-1],output[i-1]->answerTyp);
 
+			if (o.items[actuallElement].answerTyp==question){
+				visitedElements.push_back(actuallElement);
+				actuallElement=0;
+			}
+
+		}else if(i==-1){
+			break;
+		}else if(i==-2){
+			actuallElement=0;
+			visitedElements.clear();
 		}else{
-			if(i==-1) break;
-			o.update_weights(actuallElement,output[i-1]);
+			
+			o.update_weights(visitedElements,output[i-1]);
 
 			o.print_actuall(visitedElements,o.items[actuallElement].answerTyp);
 			
 			actuallElement=output[i-1];
+
+			if (o.items[actuallElement].answerTyp==question){
+				visitedElements.push_back(actuallElement);
+				actuallElement=0;
+			}
 		}
 
-		if (o.items[actuallElement].answerTyp==question){
-			visitedElements.push_back(actuallElement);
-			actuallElement=0;
-		}
+		
+
+		
 
 		
 	}

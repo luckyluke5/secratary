@@ -40,7 +40,7 @@ class Organizer
 
 		void print(size_t item);
 
-		void update_weights(size_t from_id,size_t to_id);
+		void update_weights(std::vector<size_t> from_ids,size_t to_id);
 
 		void printname(size_t item);
 			
