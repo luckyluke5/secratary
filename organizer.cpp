@@ -37,13 +37,13 @@ void Organizer::printText(std::string text){
 }
 
 void Organizer::make_ready(){
-	Item wasmachen(question, action, std::string("Um welche Action geht es?"));
+	Item wasmachen(question, action, std::string("Um welche Action geht es?"),1);
 
-	Item wielange(question, place, std::string("Um welchen Ort geht es?"));
+	Item wielange(question, place, std::string("Um welchen Ort geht es?"),2);
 
-	Item mitwem(question, person, std::string("Um welche Person geht es?"));
+	Item mitwem(question, person, std::string("Um welche Person geht es?"),3);
 	
-	Item start=Item(question,question, std::string("Mit welcher Frage willst du weitermachen"));
+	Item start=Item(question,question, std::string("Mit welcher Frage willst du weitermachen"),0);
 	
 //	printText(std::string("Was möchtest du machen?"));
 	items.push_back(start);
@@ -52,9 +52,9 @@ void Organizer::make_ready(){
 	items.push_back(mitwem);
 
 
-	items[0].item_add_conection(1.0/3,items[1]);
-	items[0].item_add_conection(1.0/3,items[2]);
-	items[0].item_add_conection(1.0/3,items[3]);
+	items[0].item_add_conection(1.0/3,1);
+	items[0].item_add_conection(1.0/3,2);
+	items[0].item_add_conection(1.0/3,3);
 
 
 	
@@ -63,39 +63,90 @@ void Organizer::make_ready(){
 //	std::cout<<items.size()<<std::endl;
 }
 
-std::vector<Item*>  Organizer::print_actuall(Item & item,ItemTyp itemTyp){
+std::vector<size_t>  Organizer::print_actuall(std::vector<size_t> visitedElements,ItemTyp itemTyp){
 
-	print(item);
+	size_t item =visitedElements.back();
+	
+	printname(item);
 
-	Item zeroItem(itemTyp,nothing,"Leer");
-	std::vector<Item*> topFiveI={&zeroItem};
-	std::vector<float> topFiveF={0};
-//	std::cout<<"test"<<topFiveF.size()<<std::endl;
-	for (size_t i=0;i<item.weights.size();i++){
-		if(item.targets[i]->itemTyp==itemTyp){
+	items[item];
+
+	std::vector<size_t> topFiveI(1,0);
+	std::vector<float> topFiveF(1,0);
+	//std::cout<<"test in print actuall and size of top"<<topFiveF.size()<<std::endl;
+	for (size_t i=0;i<items[item].weights.size();i++){
+		//std::cout<<"test in print actuall"<<i<<std::endl;
+		if(items[items[item].targets[i]].itemTyp==itemTyp){
 			for (size_t j=0;j<=topFiveF.size();j++){
-				if (topFiveF[j] < item.weights[i]){
-					topFiveI.insert(topFiveI.begin()+j,item.targets[i]);
-					topFiveF.insert(topFiveF.begin()+j,item.weights[i]);
+				if (topFiveF[j] < items[item].weights[i]){
+					topFiveI.insert(topFiveI.begin()+j,items[item].targets[i]);
+					topFiveF.insert(topFiveF.begin()+j,items[item].weights[i]);
 					break;
 				}
 			}
 		}
 	}
-				
+
+	topFiveF.pop_back();
+	topFiveI.pop_back();
 
 //	std::cout<<"test"<<topFiveF.size()<<std::endl;
 	for(size_t i=0;i<topFiveF.size();i++ ){
-		std::cout<<i+1<<": "<<topFiveI[i]->text<<" \t\t\t(W:"<<topFiveF[i]<<")"<<std::endl;
+		std::cout<<i+1<<": "<<items[topFiveI[i]].text<<" \t\t\t(W:"<<topFiveF[i]<<")"<<std::endl;
 	}
 
 	return topFiveI;
 
 }
 
-void Organizer::print(Item & item){
-	std::cout<<item.text<<std::endl;
+void Organizer::print(size_t item){
+
+	std::cout<<"Itemtyp: "<<items[item].itemTyp<<" Answertyp: "<<items[item].answerTyp<< " Text:\""<<items[item].text<<"\""<<std::endl;
+	for(size_t i=0;i<items[item].targets.size();i++ ){
+		std::cout<<"Gewicht:"<<items[item].weights[i]<<" Ziel\""<<items[items[item].targets[i]].text<<"\""<<std::endl;
+	}
+}
+
+void Organizer::printname(size_t item){
+
+	std::cout<<items[item].text<<std::endl;
+}
+
+
+
+void Organizer::update_weights(size_t from_id,size_t to_id){
+
+//	print();
+	float sumweightsbefore=0;
+	for (size_t i=0; i<items[from_id].weights.size();i++){
+		sumweightsbefore+=items[from_id].weights[i];	
+
+	}
+	float differenc=0;
+	for (size_t i=0; i<items[from_id].weights.size();i++){
+		if (items[from_id].targets[i]!=to_id){
+			differenc+=items[from_id].weights[i]*0.1;
+			items[from_id].weights[i]-=items[from_id].weights[i]*0.1;
+		}
+
+	}
+	if (differenc==0) differenc=1;
+	for (size_t i=0; i<items[from_id].weights.size();i++){
+		if (items[from_id].targets[i]==to_id){
+			items[from_id].weights[i]+=differenc;
+		}	
+
+	}
+	float sumweightsafter=0;
+	for (size_t i=0; i<items[from_id].weights.size();i++){
+		sumweightsafter+=items[from_id].weights[i];	
+
+	}
+
+	std::cout<<items[from_id].text<<", WeightsSumBefore: "<<sumweightsbefore<<" WeightsSumAfter: "<<sumweightsafter<<std::endl;
+//	print();
 
 }
+
 
 

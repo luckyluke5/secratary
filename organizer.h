@@ -34,11 +34,15 @@ class Organizer
 	public:
 		Organizer();
 		void make_ready();
-		std::vector<Item*> print_actuall(Item & item,ItemTyp itemTyp);
+		std::vector<size_t>  print_actuall(std::vector<size_t> visitedElements,ItemTyp itemTyp);
 
 		std::vector<Item> items;
 
-		void print(Item & item);
+		void print(size_t item);
+
+		void update_weights(size_t from_id,size_t to_id);
+
+		void printname(size_t item);
 			
 	private:
 

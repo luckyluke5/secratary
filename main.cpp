@@ -38,63 +38,71 @@ int main(int argc, char **argv)
 
 	o.make_ready();
 
-
-	std::vector<Item*> output=o.print_actuall(o.items[0],question);
-
+	std::vector<size_t> visitedElements;
 	
-	int i;
-	std::cin>>i;
+	size_t actuallElement=0;
+	bool continu=true;
+	while (continu){
 
-//	(*output[i]).print();
-
-	std::vector<Item*> output2=o.print_actuall(*output[i-1],output[i-1]->answerTyp);
-	
-	int j;
-	std::cin>>j;
-
-//	(*output[j]).print();
-	
-
-	if (j==0){
-		std::cout<<"test1"<<std::endl;
-		std::string name;
-		std::cout<<"test2"<<std::endl;
-		std::cout << "Please, enter your full name: ";
-		std::cin.ignore();
-		std::getline (std::cin,name);
-		std::cout<<"test3"<<name<<std::endl;
-		o.items.push_back(Item(output[i-1]->answerTyp,question,name));
-		std::cout<<"test4"<<std::endl;
-		(*output[i-1]).item_add_conection(0.5,o.items.back());
-		std::cout<<"test5"<<std::endl;
-		o.print_actuall(*output[i-1],output[i-1]->answerTyp);
-	}else{
+		//o.print(actuallElement);
 		
-		o.print_actuall(*output[j-1],output[j-1]->answerTyp);
+		visitedElements.push_back(actuallElement);
+		std::vector<size_t> output=o.print_actuall(visitedElements,o.items[actuallElement].answerTyp);
+
+		//o.print(actuallElement);
+		
+		int i;
+		std::cin>>i;
+
+		if (i==0 && o.items[actuallElement].answerTyp!=question){
+			
+			std::string name;
+			std::cout << "Tippen sie die Antwort ein: ";
+			std::cin.ignore();
+			std::getline (std::cin,name);
+
+			std::cout<<name<<std::endl;
+			//o.print(actuallElement);
+			
+			o.items.push_back(Item(o.items[actuallElement].answerTyp,question,std::string(name),o.items.size()-1));
+
+			//o.print(actuallElement);
+			
+			o.items[actuallElement].item_add_conection(0,o.items.size()-1);
+
+			//o.print(actuallElement);
+
+			o.update_weights(actuallElement,o.items.size()-1); //keine adresse
+			//std::cout << "vor print actuall"<<std::endl;
+
+			//o.print(actuallElement);
+
+			o.print_actuall(visitedElements,o.items[actuallElement].answerTyp);
+			//std::cout << "nach printactuall"<<std::endl;
+
+			actuallElement=o.items.size()-1; //keine adresse
+			//std::cout << "Test 6"<<std::endl;
+
+			//o.print_actuall(*output[i-1],output[i-1]->answerTyp);
+
+		}else{
+			if(i==-1) break;
+			o.update_weights(actuallElement,output[i-1]);
+
+			o.print_actuall(visitedElements,o.items[actuallElement].answerTyp);
+			
+			actuallElement=output[i-1];
+		}
+
+		if (o.items[actuallElement].answerTyp==question){
+			visitedElements.push_back(actuallElement);
+			actuallElement=0;
+		}
+
+		
 	}
 
-//	o.items[0].print();
 
-/*	o.items[0].print();
-	o.items[1].print();
-	o.print_actuall(o.items[0],question);
-	std::cout<<"item 1"<<std::endl;
-	o.print_actuall(o.items[1],question);
-	std::cout<<"item 2"<<std::endl;
-	o.print_actuall(o.items[2],question);
-	std::cout<<"item 3"<<std::endl;
-	o.print_actuall(o.items[3],question);
-	std::cout<<"item 4"<<std::endl;
-	o.print_actuall(o.items[4],question);
-	std::cout<<"item 5"<<std::endl;
-	o.print_actuall(o.items[5],question);
-	std::cout<<"item 6"<<std::endl;
-	o.print_actuall(o.items[6],question);
-	std::cout<<"item 7"<<std::endl;
-	o.print_actuall(o.items[7],question);
-
-	o.print();
-*/	
 	return 0;
 }
 

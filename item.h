@@ -34,17 +34,19 @@ enum ItemTyp{nothing, question,place,person, action };
 class Item
 {
 	public:
-		Item(ItemTyp _itemTyp,ItemTyp _answerTyp,std::string _string);
+		Item(ItemTyp _itemTyp,ItemTyp _answerTyp,std::string _string,size_t _id);
 		
 		ItemTyp itemTyp;
 		ItemTyp answerTyp;
 		std::string text;
+		size_t id;
 		std::vector<float> weights;
-		std::vector<Item*> targets;
+		std::vector<size_t> targets;
 		
 		void print();
 
-		void item_add_conection(float weight,Item & target);
+		void item_add_conection(float weight,size_t target);
+		void update_weights(Item & item);
  			
 	private:
 		/* add your private declarations */

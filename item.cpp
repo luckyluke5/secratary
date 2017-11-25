@@ -26,23 +26,24 @@
 
 
 
-Item::Item(ItemTyp _itemTyp,ItemTyp _answerTyp,std::string _string) : itemTyp(_itemTyp),answerTyp(_answerTyp),text(_string)
+Item::Item(ItemTyp _itemTyp,ItemTyp _answerTyp,std::string _string,size_t _id) :itemTyp(_itemTyp),answerTyp(_answerTyp),text(_string),id(_id)
 {
-
+	
 }
 
 void Item::print(){
 
 	std::cout<<"Itemtyp: "<<itemTyp<<" Answertyp: "<<answerTyp<< " Text:\""<<text<<"\""<<std::endl;
 	for(size_t i=0;i<targets.size();i++ ){
-		std::cout<<"Gewicht:"<<weights[i]<<" Ziel\""<<targets[i]->text<<"\""<<std::endl;
+		std::cout<<"Gewicht:"<<weights[i]<<" Ziel\""<<targets[i]<<"\""<<std::endl;
 	}
 }
 
 
 
-void Item::item_add_conection(float weight,Item & target){
+void Item::item_add_conection(float weight,size_t target){
 
 	weights.push_back(weight);
-	targets.push_back(&target);
+	targets.push_back(target);
 }
+
