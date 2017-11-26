@@ -1,5 +1,5 @@
 /*
- * item.cpp
+ * survey.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,26 +22,70 @@
  */
 
 
-#include "item.h"
+#include "survey.h"
 
 
-Item::Item(ItemTyp _itemTyp,std::string _string,itemID _id) :itemTyp(_itemTyp),lable(_string),id(_id)
+Survey::survey()
 {
 	
 }
 
-void Item::printConnections(){
 
-//	std::cout<<"Itemtyp: "<<itemTyp<<" Answertyp: "<<answerTyp<< " Text:\""<<text<<"\""<<std::endl;
-	for(auto & connection : connections){
-		std::cout<<"Gewicht:"<<std::get<0>(connection)<<" Ziel\""<<std::get<1>(connection)<<"\""<<std::endl;
-	}
+Survey::~survey()
+{
+	
 }
 
+void Survey::start(){
+
+	generateQuestion();
+	askForInput();
+	interpretInput();
+	handleInput();
 
 
-void Item::addConnection(float weight,itemID target){
 
-	connection.push_back(std::make_tupel(weight,target));
+
+	int i=iohandler.askForInt();
+	
 }
 
+void Survey::generateQuestion(){
+	
+	iohandler.printQuestion()
+}
+
+void Survey::askForInput(){
+
+	iohandler.askForInt();
+	
+
+}
+
+void Survey::interpretInput(){
+
+	if(i=-2){
+			closeSurvey();
+		}else if(i=-1){
+			closeSession()
+		}else if(i=0){
+			newItem();
+		}else if(i<0){
+			handelInput(i);
+		}else{
+			std::cout<<"INPUT:ERORR: \""<<i<<"\""<<std::endl;
+		}
+	
+}
+
+void Survey::newItem(){
+
+	dataOrganizer.addItem(iohandler.new_object_name(),typOfsearchedObject);
+
+}
+
+void Survey::handelInput(){
+
+	networkController.updateWeights();
+
+}

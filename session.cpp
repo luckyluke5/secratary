@@ -1,5 +1,5 @@
 /*
- * item.cpp
+ * session.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,26 +22,33 @@
  */
 
 
-#include "item.h"
+#include "session.h"
 
 
-Item::Item(ItemTyp _itemTyp,std::string _string,itemID _id) :itemTyp(_itemTyp),lable(_string),id(_id)
+Session::Session() : iohandler(IOHandler())
 {
 	
 }
 
-void Item::printConnections(){
 
-//	std::cout<<"Itemtyp: "<<itemTyp<<" Answertyp: "<<answerTyp<< " Text:\""<<text<<"\""<<std::endl;
-	for(auto & connection : connections){
-		std::cout<<"Gewicht:"<<std::get<0>(connection)<<" Ziel\""<<std::get<1>(connection)<<"\""<<std::endl;
+Session::~Session()
+{
+	
+}
+
+Session::start(){
+	
+	while (continu){
+		session.makesurvey();
 	}
 }
 
+Session::makesurvey(){
 
+	Survey survey;
+	survey.start;
+	
+	
 
-void Item::addConnection(float weight,itemID target){
-
-	connection.push_back(std::make_tupel(weight,target));
 }
 

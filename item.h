@@ -28,24 +28,28 @@
 #include <string>
 #include <iostream>
 #include <vector>
+#include <tupel>
 
 enum ItemTyp{nothing, question,place,person, action };
+
+typedef size_t itemID;
 
 class Item
 {
 	public:
-		Item(ItemTyp _itemTyp,ItemTyp _answerTyp,std::string _string,size_t _id);
+		Item(ItemTyp _itemTyp,std::string _string,itemID _id);
 		
 		ItemTyp itemTyp;
-		ItemTyp answerTyp;
-		std::string text;
-		size_t id;
-		std::vector<float> weights;
-		std::vector<size_t> targets;
-		
-		void print();
+		std::string lable;
+		itemID id;
+		std::vector<std::tupel<float,itemID>> connections;
 
-		void item_add_conection(float weight,size_t target);
+		
+		void printConnections();
+		void addConnection(float weight,itemID target);
+
+
+
  			
 	private:
 		/* add your private declarations */

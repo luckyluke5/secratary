@@ -33,10 +33,17 @@ class Organizer
 {
 	public:
 		Organizer();
+
+		std::vector<Item> items;
+
+		std::vector<Question> questions;
+
+
+		
 		void make_ready();
 		std::vector<size_t>  print_actuall(std::vector<size_t> & visitedElements,ItemTyp itemTyp);
 
-		std::vector<Item> items;
+		
 
 		void print(size_t item);
 
