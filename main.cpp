@@ -41,12 +41,13 @@ int main(int argc, char **argv)
 	std::vector<size_t> visitedElements;
 	
 	size_t actuallElement=0;
+	visitedElements.push_back(actuallElement);
 	bool continu=true;
 	while (continu){
 
 		//o.print(actuallElement);
-		
-		visitedElements.push_back(actuallElement);
+		if (actuallElement!=0 or visitedElements.size()==0) visitedElements.push_back(actuallElement);
+		//visitedElements.push_back(actuallElement);
 		std::vector<size_t> output=o.print_actuall(visitedElements,o.items[actuallElement].answerTyp);
 		//std::cout<<"tippen sie eine zahl grosser null ein oder 0 für eine eigene antwort"<<std::endl;
 

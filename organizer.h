@@ -34,7 +34,7 @@ class Organizer
 	public:
 		Organizer();
 		void make_ready();
-		std::vector<size_t>  print_actuall(std::vector<size_t> visitedElements,ItemTyp itemTyp);
+		std::vector<size_t>  print_actuall(std::vector<size_t> & visitedElements,ItemTyp itemTyp);
 
 		std::vector<Item> items;
 

@@ -63,24 +63,38 @@ void Organizer::make_ready(){
 //	std::cout<<items.size()<<std::endl;
 }
 
-std::vector<size_t>  Organizer::print_actuall(std::vector<size_t> visitedElements,ItemTyp itemTyp){
+std::vector<size_t>  Organizer::print_actuall(std::vector<size_t> & visitedElements,ItemTyp itemTyp){
 
-	size_t item =visitedElements.back();
+	std::vector<float> weight_buffer(items.size(),0);
+
+	float factor=0;
 	
-	printname(item);
+	for (auto item : visitedElements){
+		for (size_t i=0;i<items[item].weights.size();i++){
 
-	items[item];
+			weight_buffer[items[item].targets[i]]+=items[item].weights[i];
+			if (items[items[item].targets[i]].itemTyp==itemTyp){
+				factor+=items[item].weights[i];
+				//std::cout<<"factor "<<factor<<std::endl;
+			}
 
+		}
+	}
+
+/*	for (auto it : weight_buffer){
+		std::cout<<"weight "<<it<<std::endl;
+	}
+*/
 	std::vector<size_t> topFiveI(1,0);
 	std::vector<float> topFiveF(1,0);
 	//std::cout<<"test in print actuall and size of top"<<topFiveF.size()<<std::endl;
-	for (size_t i=0;i<items[item].weights.size();i++){
+	for (size_t i=0;i<weight_buffer.size();i++){
 		//std::cout<<"test in print actuall"<<i<<std::endl;
-		if(items[items[item].targets[i]].itemTyp==itemTyp){
+		if(items[i].itemTyp==itemTyp){
 			for (size_t j=0;j<=topFiveF.size();j++){
-				if (topFiveF[j] < items[item].weights[i]){
-					topFiveI.insert(topFiveI.begin()+j,items[item].targets[i]);
-					topFiveF.insert(topFiveF.begin()+j,items[item].weights[i]);
+				if (topFiveF[j] < weight_buffer[i]/factor){
+					topFiveI.insert(topFiveI.begin()+j,i);
+					topFiveF.insert(topFiveF.begin()+j,weight_buffer[i]/factor);
 					break;
 				}
 			}
@@ -177,14 +191,14 @@ void Organizer::update_weights(std::vector<size_t> from_ids,size_t to_id){
 		}
 		if (exsisting==false){
 			//std::cout<<"hinzufügen von verbindungen"<<to_id<<"its"<<items[to_id].text<<std::endl;
-			for (auto & it : items[from_id].weights) it-=it*(2.0/(items[from_id].targets.size()+2.0));
-			items[from_id].item_add_conection(2.0/(items[from_id].targets.size()+2.0),to_id);
+			for (auto & it : items[from_id].weights) it-=it*(1.0/(items[from_id].targets.size()+1.0));
+			items[from_id].item_add_conection(1.0/(items[from_id].targets.size()+1.0),to_id);
 		}else{
 			double differenc=0;
 			for (auto & it:items[from_id].weights){
 				//std::cout<<"test"<<differenc<<"its"<<it<<std::endl;
-				it-=it*0.10000000;
-				differenc+=it*0.10000000;
+				it-=it*0.01;
+				differenc+=it*0.01;
 			}
 			items[from_id].weights[connection_id]+=differenc;
 	

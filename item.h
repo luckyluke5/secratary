@@ -46,7 +46,6 @@ class Item
 		void print();
 
 		void item_add_conection(float weight,size_t target);
-		void update_weights(Item & item);
  			
 	private:
 		/* add your private declarations */
