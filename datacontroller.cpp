@@ -1,5 +1,5 @@
 /*
- * organizer.h
+ * datacontroler.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,40 +22,44 @@
  */
 
 
-#ifndef ORGANIZER_H
-#define ORGANIZER_H
-
-#include <vector>
-#include "item.h"
+#include "datacontroller.h"
 
 
-class Organizer
+DataController::DataController()
 {
-	public:
-		Organizer(DataControler & _datacontroller);
-
-		std::vector<Item> items;
-
-		std::vector<Question> questions;
-
-		DataControler *dataController
-		
-//		void make_ready();
-		std::vector<size_t>  print_actuall(std::vector<size_t> & visitedElements,ItemTyp itemTyp);
-
-		
-
-		void print(size_t item);
-
-		void update_weights(std::vector<size_t> from_ids,size_t to_id);
-
-		void printname(size_t item);
-			
-	private:
-
 	
-		void printText(std::string text);
-		/* add your private declarations */
-};
+}
 
-#endif /* ORGANIZER_H */ 
+
+DataController::~DataController()
+{
+	
+}
+
+void DataController::make_ready(){
+
+	Item wasmachen(question, action, std::string("Um welche Action geht es?"),1);
+
+	Item wielange(question, place, std::string("Um welchen Ort geht es?"),2);
+
+	Item mitwem(question, person, std::string("Um welche Person geht es?"),3);
+	
+	Item start=Item(question,question, std::string("Mit welcher Frage willst du weitermachen"),0);
+
+	items.push_back(start);
+	items.push_back(wasmachen);
+	items.push_back(wielange);
+	items.push_back(mitwem);
+
+
+	items[0].item_add_conection(1.0/3,1);
+	items[0].item_add_conection(1.0/3,2);
+	items[0].item_add_conection(1.0/3,3);
+
+}
+
+
+
+
+
+

@@ -30,10 +30,13 @@
 class Session
 {
 	public:
-		Session();
+		Session(DataController & _dataController);
 		virtual ~Session();
 
 		bool continu;
+
+		DataController dataController;
+		Survey actuallSurvey;
 
 		continu();
 	

@@ -28,10 +28,13 @@
 class Survey
 {
 	public:
-		Survey();
+		Survey(DataController & _dataController);
 		virtual ~Survey();
 
-		start();
+		DataController dataController;
+		
+		SurveyForQuestion surveyForQuestion;
+		SurveyForInformation surveyForInformation;
 	
 	private:
 		/* add your private declarations */

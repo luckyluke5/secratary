@@ -25,9 +25,14 @@
 #include "organizer.h"
 
 
-Organizer::Organizer() 
+Organizer::Organizer(DataController & _dataController) : dataController(_dataController) 
 {
 	
+}
+
+void Organizer.start(){
+
+	Session session(dataController);
 }
 
 void Organizer::printText(std::string text){
@@ -36,7 +41,8 @@ void Organizer::printText(std::string text){
 	std::cout<<std::string(text)<<std::endl;
 }
 
-void Organizer::make_ready(){
+/*void Organizer::make_ready(){
+
 	Item wasmachen(question, action, std::string("Um welche Action geht es?"),1);
 
 	Item wielange(question, place, std::string("Um welchen Ort geht es?"),2);
@@ -61,7 +67,7 @@ void Organizer::make_ready(){
 //	items[0].print();
 //	items[1].print();
 //	std::cout<<items.size()<<std::endl;
-}
+}*/
 
 std::vector<size_t>  Organizer::print_actuall(std::vector<size_t> & visitedElements,ItemTyp itemTyp){
 

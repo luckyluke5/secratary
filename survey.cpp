@@ -25,67 +25,55 @@
 #include "survey.h"
 
 
-Survey::survey()
+Survey::Survey(DataController & _dataController) : DataController(_dataController)
 {
 	
 }
 
 
-Survey::~survey()
+Survey::~Survey()
 {
 	
 }
 
 void Survey::start(){
 
-	generateQuestion();
-	askForInput();
-	interpretInput();
-	handleInput();
+	askForQuestion();
+	analyseQuestionAnswer();
 
-
-
-
-	int i=iohandler.askForInt();
+	askForInformation()
+	analyseInformation();
 	
 }
 
-void Survey::generateQuestion(){
-	
-	iohandler.printQuestion()
-}
+void Survey::askForQuestion(){
 
-void Survey::askForInput(){
-
-	iohandler.askForInt();
-	
-
-}
-
-void Survey::interpretInput(){
-
-	if(i=-2){
-			closeSurvey();
-		}else if(i=-1){
-			closeSession()
-		}else if(i=0){
-			newItem();
-		}else if(i<0){
-			handelInput(i);
-		}else{
-			std::cout<<"INPUT:ERORR: \""<<i<<"\""<<std::endl;
-		}
+	surveyforquestion=SurveyForInformation(dataController);
+	surveyforquestion.start();
 	
 }
 
-void Survey::newItem(){
+void Survey::analyseQuestionAnswer(){
 
-	dataOrganizer.addItem(iohandler.new_object_name(),typOfsearchedObject);
+	surveyforquestion.handelInput();
+
+
+}
+
+
+
+void Survey::askForInformation(){
+
+	surveyForInformation=SurveyForInformation(dataController);
+	surveyForInformation.start();
+	
+	
 
 }
 
-void Survey::handelInput(){
+void Survey::analyseInformation(){
 
-	networkController.updateWeights();
+	
 
 }
+

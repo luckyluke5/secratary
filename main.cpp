@@ -36,9 +36,11 @@ int main(int argc, char **argv)
 
 	DataOrganizer dataOrganizer;
 
-	IOHandler iohandler;
+	dataOrganizer.make_ready();
 
-	Organizer organizer(dataOrganizer,iohandler);
+//	IOHandler iohandler;
+
+	Organizer organizer(dataOrganizer);
 
 	organizer.start()
 

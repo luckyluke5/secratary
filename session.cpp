@@ -25,7 +25,7 @@
 #include "session.h"
 
 
-Session::Session() : iohandler(IOHandler())
+Session::Session(DataController & _dataController) : dataController(_dataController)
 {
 	
 }
@@ -39,15 +39,38 @@ Session::~Session()
 Session::start(){
 	
 	while (continu){
-		session.makesurvey();
+
+		actuallSurvey=Survey(dataController);
+		actuallSurvey.start();
+		
 	}
 }
 
-Session::makesurvey(){
+void Session::askForQuestion(){
 
-	Survey survey;
-	survey.start;
+
+}
+
+void Session::analyseQuestionAnswer(){
+
 	
+
+
+}
+
+
+
+void Session::askForInformation(){
+
+	actuallSurvey=Survey(dataController);
+	actuallSurvey.start();
+	
+	
+
+}
+
+void Session::analyseInformation(){
+
 	
 
 }

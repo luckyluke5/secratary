@@ -1,5 +1,5 @@
 /*
- * organizer.h
+ * surveyforinformation.h
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,40 +22,19 @@
  */
 
 
-#ifndef ORGANIZER_H
-#define ORGANIZER_H
+#ifndef SURVEYFORINFORMATION_H
+#define SURVEYFORINFORMATION_H
 
-#include <vector>
-#include "item.h"
-
-
-class Organizer
+class SurveyForInformation
 {
 	public:
-		Organizer(DataControler & _datacontroller);
+		SurveyForInformation();
+		virtual ~SurveyForInformation();
 
-		std::vector<Item> items;
-
-		std::vector<Question> questions;
-
-		DataControler *dataController
-		
-//		void make_ready();
-		std::vector<size_t>  print_actuall(std::vector<size_t> & visitedElements,ItemTyp itemTyp);
-
-		
-
-		void print(size_t item);
-
-		void update_weights(std::vector<size_t> from_ids,size_t to_id);
-
-		void printname(size_t item);
-			
-	private:
-
+		start();
 	
-		void printText(std::string text);
+	private:
 		/* add your private declarations */
 };
 
-#endif /* ORGANIZER_H */ 
+#endif /* SURVEYFORINFORMATION_H */ 
