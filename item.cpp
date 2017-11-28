@@ -25,22 +25,24 @@
 #include "item.h"
 
 
-Item::Item(ItemTyp _itemTyp,std::string _string,itemID _id) :itemTyp(_itemTyp),lable(_string),id(_id)
+
+Item::Item(ItemTyp _itemTyp,ItemTyp _answerTyp,std::string _string,size_t _id) :itemTyp(_itemTyp),answerTyp(_answerTyp),text(_string),id(_id)
 {
 	
 }
 
-void Item::printConnections(){
+void Item::print(){
 
-//	std::cout<<"Itemtyp: "<<itemTyp<<" Answertyp: "<<answerTyp<< " Text:\""<<text<<"\""<<std::endl;
-	for(auto & connection : connections){
-		std::cout<<"Gewicht:"<<std::get<0>(connection)<<" Ziel\""<<std::get<1>(connection)<<"\""<<std::endl;
+	std::cout<<"Itemtyp: "<<itemTyp<<" Answertyp: "<<answerTyp<< " Text:\""<<text<<"\""<<std::endl;
+	for(size_t i=0;i<targets.size();i++ ){
+		std::cout<<"Gewicht:"<<weights[i]<<" Ziel\""<<targets[i]<<"\""<<std::endl;
 	}
 }
 
 
 
-void Item::addConnection(float weight,itemID target){
+void Item::item_add_conection(float weight,size_t target){
 
-	connection.push_back(std::make_tupel(weight,target));
+	weights.push_back(weight);
+	targets.push_back(target);
 }
