@@ -34,23 +34,6 @@ void print(const char* text){
 int main(int argc, char **argv)
 {
 
-	DataOrganizer dataOrganizer;
-
-	IOHandler iohandler;
-
-	Organizer organizer(dataOrganizer,iohandler);
-
-	organizer.start()
-
-
-
-
-
-
-
-
-
-
 	Organizer o;
 
 	o.make_ready();
@@ -140,4 +123,3 @@ int main(int argc, char **argv)
 
 	return 0;
 }
-
