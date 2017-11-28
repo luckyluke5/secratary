@@ -38,7 +38,7 @@ class Section
 	
 	private:
 		QuestionStrategieManager qsManager;
-		AnswerManager aManager;
+		QuestionManager aManager;
 
 		DataController dataController;
 

@@ -1,5 +1,5 @@
 /*
- * section.cpp
+ * surveyforquestion.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,33 +22,45 @@
  */
 
 
-#include "section.h"
+#include "surveyforquestion.h"
 
 
-Section::Section(DataController & _dataController) : dataController(_dataController)
-{
-	QuestionStrategieManager qsManager(_dataController);
-	QuestionManager aManager (_dataController);
-}
-
-
-Section::~Section()
+SurveyForQuestion::SurveyForQuestion(QuestionSratagieManager & _qsManager) : qsManager(_qsManager)
 {
 	
 }
 
-void run(){
 
-	while (qsManager.continueWithAsking())
-		SurveyForQuestion surveyForQuestion(qsManager);
-		surveyForQuestion.run();
+SurveyForQuestion::~SurveyForQuestion()
+{
+	
+}
 
-		if (qsManager.continueWithAsking()){
-			SurveyForInformation surveyForInformation(aManager);
-			surveyForInformation.run();
-		}else {
-			makeEndingAction();
-		}
+void SurveyForQuestion::run(){
 
+	IOHandlerForQuestionAksing iohandler;
+//	iohandler.questionData(qsManager.questionData());
+	iohandler.possibleAnswerData(qsManager.possibleAnswerData());
+	iohandler.print();
+
+	if(iohandler.answerTyp()=IOQANew){
+		qsManager.newQuestion(iohandler.answer());
+		
+	}else if(iohandler.answerTyp()=IOQAExisting){
+		qsManager.answer(iohandler.answer());
+		
+	}else if(iohandler.answerTyp()=IOQAFailure){
+		iohandler.feedbackFailure();
+		runAgain();
+	}else{
+		iohandler.feedbackFailure();
+		runAgain();
+	}
+
+}
+
+void SurveyForQuestion::runAgain(){
+
+	run();
 }
 

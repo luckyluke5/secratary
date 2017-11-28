@@ -1,5 +1,5 @@
 /*
- * section.cpp
+ * surveyforquestion.h
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,33 +22,20 @@
  */
 
 
-#include "section.h"
+#ifndef SURVEYFORQUESTION_H
+#define SURVEYFORQUESTION_H
 
-
-Section::Section(DataController & _dataController) : dataController(_dataController)
+class SurveyForQuestion
 {
-	QuestionStrategieManager qsManager(_dataController);
-	QuestionManager aManager (_dataController);
-}
+	public:
+		SurveyForQuestion(QuestionSratagieManager & _qsManager);
+		virtual ~SurveyForQuestion();
 
-
-Section::~Section()
-{
+		void run();
 	
-}
+	private:
+		QuestionSratagieManager qsManager;
+		/* add your private declarations */
+};
 
-void run(){
-
-	while (qsManager.continueWithAsking())
-		SurveyForQuestion surveyForQuestion(qsManager);
-		surveyForQuestion.run();
-
-		if (qsManager.continueWithAsking()){
-			SurveyForInformation surveyForInformation(aManager);
-			surveyForInformation.run();
-		}else {
-			makeEndingAction();
-		}
-
-}
-
+#endif /* SURVEYFORQUESTION_H */ 
