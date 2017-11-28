@@ -44,4 +44,3 @@ void Item::addConnection(float weight,itemID target){
 
 	connection.push_back(std::make_tupel(weight,target));
 }
-
