@@ -48,15 +48,16 @@ void Survey::start(){
 
 void Survey::askForQuestion(){
 
-	surveyforquestion=SurveyForInformation(dataController);
-	surveyforquestion.start();
+	surveyForQuestion=SurveyForInformation(dataController);
+	surveyForQuestion.possibleCoises(inputForQuestion);
+	surveyForQuestion.start();
 	
 }
 
 void Survey::analyseQuestionAnswer(){
 
 	surveyforquestion.handelInput();
-
+	
 
 }
 

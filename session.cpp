@@ -46,32 +46,5 @@ Session::start(){
 	}
 }
 
-void Session::askForQuestion(){
 
-
-}
-
-void Session::analyseQuestionAnswer(){
-
-	
-
-
-}
-
-
-
-void Session::askForInformation(){
-
-	actuallSurvey=Survey(dataController);
-	actuallSurvey.start();
-	
-	
-
-}
-
-void Session::analyseInformation(){
-
-	
-
-}
 
