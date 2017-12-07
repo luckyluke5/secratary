@@ -36,6 +36,8 @@ QuestionStrategieManager::~QuestionStrategieManager()
 	
 }
 
+
+
 std::vector<ConnectionToQuestion> & QuestionStrategieManager::possibleAnswerData(){
 	
 	return normateTheWeights(calculateConnectionsToQuestions(calculateConnectionsToQuestionStrategies()));

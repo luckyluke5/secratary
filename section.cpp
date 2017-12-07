@@ -27,7 +27,7 @@
 
 Section::Section(DataController & _dataController) : dataController(_dataController)
 {
-	QuestionStrategieManager qsManager(_dataController);
+	qsManager=QuestionStrategieManager(_dataController);
 	QuestionManager aManager (_dataController);
 }
 
@@ -35,6 +35,11 @@ Section::Section(DataController & _dataController) : dataController(_dataControl
 Section::~Section()
 {
 	
+}
+
+void Section::addStartInformationForQuestionStrategis(std::vector<ConnectionToQuestionStrategie> & connectionToQuestionStrategies){
+	
+	qsManager.startWeights(connectionToQuestionStrategies);
 }
 
 void run(){
@@ -48,6 +53,10 @@ void run(){
 			surveyForInformation.run();
 		}else {
 			makeEndingAction();
+			connectQuestionStrategieWithStartInformation();
+
+			connectQuestionStrategieWithPreviousEndingActions();
+			connectQuestionStrategieWithPreviousQuestionStrategie();
 		}
 
 }

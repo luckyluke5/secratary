@@ -25,8 +25,8 @@
 #ifndef SECTION_H
 #define SECTION_H
 
-#include "questionStrategieManager.h"
-#include "answerManager.h"
+#include "questionstrategiemanager.h"
+#include "answermanager.h"
 
 class Section
 {
