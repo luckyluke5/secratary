@@ -1,5 +1,5 @@
 /*
- * datacontroller.h
+ * connection.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,21 +22,17 @@
  */
 
 
-#ifndef DATACONTROLLER_H
-#define DATACONTROLLER_H
+#include "connection.h"
 
-class DataController
+
+Connection::Connection(connectionWeight _weight) :  weight(_weight)
 {
-	public:
-		DataController();
-		virtual ~DataController();
-
-		
-
-		std::vector<Item> items;
 	
-	private:
-		/* add your private declarations */
-};
+}
 
-#endif /* DATACONTROLLER_H */ 
+
+Connection::~Connection()
+{
+	
+}
+

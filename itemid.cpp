@@ -1,5 +1,5 @@
 /*
- * datacontroller.h
+ * itemid.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,21 +22,17 @@
  */
 
 
-#ifndef DATACONTROLLER_H
-#define DATACONTROLLER_H
+#include "itemid.h"
 
-class DataController
+
+ItemID::ItemID(ItemNumber _id,ItemTyp _itemTyp(),DataController & _dataController) id(_id) itemTyp(_itemTyp) dataController(_dataController)
 {
-	public:
-		DataController();
-		virtual ~DataController();
-
-		
-
-		std::vector<Item> items;
 	
-	private:
-		/* add your private declarations */
-};
+}
 
-#endif /* DATACONTROLLER_H */ 
+
+ItemID::~ItemID()
+{
+	
+}
+

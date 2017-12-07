@@ -1,5 +1,5 @@
 /*
- * datacontroller.h
+ * questionstrategieid.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,21 +22,18 @@
  */
 
 
-#ifndef DATACONTROLLER_H
-#define DATACONTROLLER_H
+#include "questionstrategieid.h"
 
-class DataController
+
+QuestionStrategieID::QuestionStrategieID(ItemNumber _id, DataController & _dataController)
+	: ItemID(_id,ITquestion_strategie,_dataController)
 {
-	public:
-		DataController();
-		virtual ~DataController();
-
-		
-
-		std::vector<Item> items;
 	
-	private:
-		/* add your private declarations */
-};
+}
 
-#endif /* DATACONTROLLER_H */ 
+
+QuestionStrategieID::~QuestionStrategieID()
+{
+	
+}
+

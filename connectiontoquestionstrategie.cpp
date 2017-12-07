@@ -1,5 +1,5 @@
 /*
- * datacontroller.h
+ * connectiontoquestionstrategie.cpp
  * 
  * Copyright 2017 Lucas <lucas@linux-n51u>
  * 
@@ -22,21 +22,18 @@
  */
 
 
-#ifndef DATACONTROLLER_H
-#define DATACONTROLLER_H
+#include "connectiontoquestionstrategie.h"
 
-class DataController
+
+ConnectionToQuestionStrategie::ConnectionToQuestionStrategie(QuestionStrategieID _target, connectionWeight _weight)
+	: Connection(_weight)
 {
-	public:
-		DataController();
-		virtual ~DataController();
-
-		
-
-		std::vector<Item> items;
 	
-	private:
-		/* add your private declarations */
-};
+}
 
-#endif /* DATACONTROLLER_H */ 
+
+ConnectionToQuestionStrategie::~ConnectionToQuestionStrategie()
+{
+	
+}
+

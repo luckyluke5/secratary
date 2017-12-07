@@ -25,6 +25,8 @@
 #ifndef QUESTIONSTRATEGIEMANAGER_H
 #define QUESTIONSTRATEGIEMANAGER_H
 
+#include "datacontroller.h"
+
 class QuestionStrategieManager
 {
 	public:

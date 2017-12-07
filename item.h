@@ -28,7 +28,7 @@
 #include <string>
 #include <iostream>
 #include <vector>
-#include <tupel>
+#include <tuple>
 
 enum ItemTyp{nothing, question,place,person, action };
 
@@ -42,7 +42,7 @@ class Item
 		ItemTyp itemTyp;
 		std::string lable;
 		itemID id;
-		std::vector<std::tupel<float,itemID>> connections;
+		std::vector<std::tuple<float,itemID>> connections;
 
 		
 		void printConnections();
