@@ -36,12 +36,18 @@ class QuestionStrategieManager
 		std::vector<ConnectionToQuestion> & possibleAnswerData();
 
 		newQuestion(QuestionID & newQuestion);
+		answer(Question ID & answer);
 
-		std::vector<QuestionStrategieID> questionStrategieIDs;
+
+		std::vector<ConnectionToQuestionStrategie> ctQSs;
 	
 	private:
 		std::vector<ConnectionToQuestion> & calculateConnectionsToQuestions(std::vector<ConnectionToQuestionStrategie> & connectionsToQuestionStrategies);
 		std::vector<ConnectionToQuestionStrategie> & calculateConnectionsToQuestionStrategies();
+
+
+		std::vector<QuestionStrategieID> questionStrategieIDs;
+		std::vector<ItemID> answers;
 		/* add your private declarations */
 };
 

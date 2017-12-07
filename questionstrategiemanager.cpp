@@ -88,6 +88,9 @@ void QuestionStrategieManager::newQuestion(QuestionID & questionID){
 	// neu frage die an dieser stelle gut gewesen wär
 	// frage so verknüpfen und question strategies updaten,
 	// das nächstes mal möglicherweise diese frage empfolen wird
+	addQuestionStrategieAndUpdateWeightFor(questionID);
+	
+	
 
 }
 
@@ -95,5 +98,13 @@ void QuestionStrategieManager::answer(QuestionID & questionID){
 
 	// diese frage wurde ausgewählt. gewichte so updaten, das diese frage das nächste mal genommen werden kann
 	// ebenfalls question strategies array so updaten, das unmögliche question strategies entfernt werden
+	for (auto questionStrategieId : questionStrategieIDs){
+		
+		if (questionStrategieId.actuallQuestionID!=questionID){
 
+			questionStrategieIds.erase(questionStrategieId);
+
+		}
+
+	}
 }
