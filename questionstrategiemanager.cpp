@@ -36,7 +36,11 @@ QuestionStrategieManager::~QuestionStrategieManager()
 	
 }
 
+void QuestionStrategieManager::startWeights(std::vector<ConnectionToQuestionStrategie> & connectionsToQuestionStrategies){
 
+	startingConnections=connectionsToQuestionStrategies;
+
+}
 
 std::vector<ConnectionToQuestion> & QuestionStrategieManager::possibleAnswerData(){
 	
@@ -47,11 +51,11 @@ std::vector<ConnectionToQuestion> & QuestionStrategieManager::possibleAnswerData
 
 std::vector<ConnectionToQuestion> & QuestionStrategieManager::calculateConnectionsToQuestions(std::vector<ConnectionToQuestionStrategie> & connectionsToQuestionStrategies){
 
-	// sollte so für immer gehen, da einfach nur die gewichte für die einzel fragen aus
-	// den gewichten für die strategien kopiert wird
+	/// sollte so für immer gehen, da einfach nur die gewichte für die einzel fragen aus
+	/// den gewichten für die strategien kopiert wird
 
-	// noch gedanken sind darüber zu machen, wie es geschafft werden kann, das die gewichte nicht immer wieder neu berechnet
-	// werden müssen, sondern nur die änderungen drauf addiert werden.
+	/// noch gedanken sind darüber zu machen, wie es geschafft werden kann, das die gewichte nicht immer wieder neu berechnet
+	/// werden müssen, sondern nur die änderungen drauf addiert werden.
 	std::vector <ConnectionToQuestion> connectionsToQuestions;
 	for (ItemID i=0;i<dataController.numberOfQuestions();i++){
 
@@ -71,25 +75,22 @@ std::vector<ConnectionToQuestion> & QuestionStrategieManager::calculateConnectio
 
 std::vector<ConnectionToQuestionStrategie> & QuestionStrategieManager::calculateConnectionsToQuestionStrategies(){
 
-	// diese Funktion braucht noch richtigen inhalt.
-	// sie soll die fragen in sortierter gewichtsreihenfolge ausgeben
-	// die jetzt aufgrund von antoworten in dieser section und den vorrangegangenen
-	// fragestrategien am sinnvolsten sind. ob vorrangegangene end_actions zu breücksichtigen
-	// sind ist noch zu überlegen.
+	/// diese Funktion braucht noch richtigen inhalt.
+	/// sie soll die fragen in sortierter gewichtsreihenfolge ausgeben
+	/// die jetzt aufgrund von antoworten in dieser section und den vorrangegangenen
+	/// fragestrategien am sinnvolsten sind. ob vorrangegangene end_actions zu breücksichtigen
+	/// sind ist noch zu überlegen.
 
-	std::vector <ConnectionToQuestionStrategie> connectionsToQuestionStrategies;
-	for (auto questionStrategieId : questionStrategieIDs){
+	
 
-		connectionsToQuestionStrategies.push_back(ConnectionToQuestionStrategie(questionStrategieId,1.0/questionStrategieIDs.sizeOf()));
-
-	}
+	return startingConnections;
 }
 
 void QuestionStrategieManager::newQuestion(QuestionID & questionID){
 
-	// neu frage die an dieser stelle gut gewesen wär
-	// frage so verknüpfen und question strategies updaten,
-	// das nächstes mal möglicherweise diese frage empfolen wird
+	/// neu frage die an dieser stelle gut gewesen wär
+	/// frage so verknüpfen und question strategies updaten,
+	/// das nächstes mal möglicherweise diese frage empfolen wird
 	addQuestionStrategieAndUpdateWeightFor(questionID);
 	
 	
@@ -98,8 +99,8 @@ void QuestionStrategieManager::newQuestion(QuestionID & questionID){
 
 void QuestionStrategieManager::answer(QuestionID & questionID){
 
-	// diese frage wurde ausgewählt. gewichte so updaten, das diese frage das nächste mal genommen werden kann
-	// ebenfalls question strategies array so updaten, das unmögliche question strategies entfernt werden
+	/// diese frage wurde ausgewählt. gewichte so updaten, das diese frage das nächste mal genommen werden kann
+	/// ebenfalls question strategies array so updaten, das unmögliche question strategies entfernt werden
 	for (auto questionStrategieId : questionStrategieIDs){
 		
 		if (questionStrategieId.actuallQuestionID!=questionID){

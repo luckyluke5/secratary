@@ -40,8 +40,22 @@ Session::start(){
 	
 	while (continu){
 
-		actuallSurvey=Survey(dataController);
-		actuallSurvey.start();
+		Section section(dataController);
+		
+		std::vector <ConnectionToQuestionStrategie> connectionsToQuestionStrategies;
+		for (auto questionStrategieId : dataController.questionStrategieIDs()){
+
+			connectionsToQuestionStrategies.push_back(ConnectionToQuestionStrategie(questionStrategieId,1.0/questionStrategieIDs.sizeOf()));
+
+		}
+
+		connectionsToQuestionStrategies
+
+		section.addStartInformationForQuestionStrategis(connectionsToQuestionStrategies);
+
+		section.run()
+		//actuallSurvey=Survey(dataController);
+		//actuallSurvey.start();
 		
 	}
 }

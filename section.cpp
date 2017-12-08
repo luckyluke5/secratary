@@ -42,7 +42,7 @@ void Section::addStartInformationForQuestionStrategis(std::vector<ConnectionToQu
 	qsManager.startWeights(connectionToQuestionStrategies);
 }
 
-void run(){
+void Section::run(){
 
 	while (qsManager.continueWithAsking())
 		SurveyForQuestion surveyForQuestion(qsManager);

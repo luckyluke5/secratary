@@ -35,20 +35,26 @@ class QuestionStrategieManager
 
 		DataController dataController;
 
+		void startWeights(std::vector<ConnectionToQuestionStrategie> & connectionsToQuestionStrategies)
+
 		std::vector<ConnectionToQuestion> & possibleAnswerData();
 
 		newQuestion(QuestionID & newQuestion);
 		answer(Question ID & answer);
 
 
-		std::vector<ConnectionToQuestionStrategie> ctQSs;
+		std::vector<ConnectionToQuestionStrategie> startingConnections;
 	
 	private:
+		///berechnet die Verbindungen zu den einzelnen Fragen, aufgrund der Verbindung zu den einzelnen Strategien
 		std::vector<ConnectionToQuestion> & calculateConnectionsToQuestions(std::vector<ConnectionToQuestionStrategie> & connectionsToQuestionStrategies);
+
+		///berchnet die Verbindung zu den einzelnen Strategien, auf grund der Startbedingungen
+		///, den schlussaktionen dr vorherigen sections und der question strategie der vorherigen sections
 		std::vector<ConnectionToQuestionStrategie> & calculateConnectionsToQuestionStrategies();
 
 
-		std::vector<QuestionStrategieID> questionStrategieIDs;
+//		std::vector<QuestionStrategieID> questionStrategieIDs;
 		std::vector<ItemID> answers;
 		/* add your private declarations */
 };
